@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.Map;
 
@@ -30,20 +32,26 @@ public class LanguageController {
     private String apiKey;
 
     public static Map<String, String> map;
+  public static  Language languages ;
 
     // Rest call using feign client
-    @GetMapping("/")
-    public ModelAndView getLanguages() throws IOException {
-        ModelAndView modelAndVeiewForIndex = new ModelAndView("index");
-        System.out.println("hello");
-        Language languages = languageClient.getLanguages(apiHost, apiKey);
+
+    @PostConstruct
+    public  void getLanguagesAtDeploymentTime(){
+        languages = languageClient.getLanguages(apiHost, apiKey);
         Data data = languages.getData();
         ObjectMapper oMapper = new ObjectMapper();
         map = oMapper.convertValue(data, Map.class);
         map.remove("auto");
+    }
+
+
+    @GetMapping("/")
+    public ModelAndView getLanguages() throws IOException {
+        ModelAndView modelAndVeiewForIndex = new ModelAndView("index");
+        System.out.println("hello");
         modelAndVeiewForIndex.addObject("map", map);
         modelAndVeiewForIndex.addObject("response", new Response());
-
         return modelAndVeiewForIndex;
     }
 
