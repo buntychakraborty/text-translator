@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org/">
+<head>
+  <title>Bunty's Translator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/footer.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>BuTranslate</h2>
+  <p>This mini-application is used to translate any text to any selected language</p>
+  <form action="#" th:action="@{/translate}" th:object="${response}" method="post">
+  <div class="form-group">
+  <label for="sel1">Convert From</label>
+  <select class="form-control" id="sel1"  th:field="*{convertFrom}">
+    <option  th:each="entry, stat : ${map}"
+
+            th:value="${entry.key}"
+            th:text="${entry.value}"
+
+    ></option>
+  </select>
+</div>
+
+    <div class="form-group">
+      <label for="comment">Enter your text</label>
+      <textarea class="form-control" rows="5" id="comment" th:field="*{text}"></textarea>
+    </div>
+	
+	<div class="form-group">
+  <label for="sel1">Converted To</label>
+      <select class="form-control" id="sel1" th:field="*{convertedTo}">
+        <option  th:each="entry, stat : ${map}"
+                 th:value="${entry.key}"
+                 th:text="${entry.value}"
+
+        ></option>
+      </select>
+</div>
+	
+
+	<input type="submit" class="btn btn-success" value="Translate"></input>
+  </form>
+</div>
+
+
+</body>
+<br />
+<p align="center">
+  Made with <span class="iconify" data-icon="ion-heart"> </span> by Bunty
+  Chakraborty
+</p>
+</html>

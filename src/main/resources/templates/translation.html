@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org/">
+<head>
+  <title>Bunty's Translator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Translated Result</h2>
+  <form action="#" th:action="@{/}" th:object="${response}" method="get">
+  <div class="form-group">
+  <label for="sel1">Convert From</label>
+  <select class="form-control" id="sel1"  disabled="disabled">
+    <option
+
+
+            th:text="${response.convertFrom}"
+
+    ></option>
+  </select>
+</div>
+
+    <div class="form-group">
+      <label for="comment">Enter your text</label>
+      <textarea class="form-control" rows="5" id="comment"  disabled="disabled"  th:text="${response.text}" ></textarea>
+    </div>
+	
+	<div class="form-group">
+  <label for="sel1">Converted To</label>
+      <select class="form-control" id="sel1" disabled="disabled">
+        <option
+
+                 th:text="${response.convertedTo}"
+
+        ></option>
+      </select>
+</div>
+	
+	<div class="form-group">
+      <label for="comment">Converted Text</label>
+      <textarea class="form-control" rows="5" id="comment"  th:text="${response.translatedText}" disabled="disabled"
+      ></textarea>
+    </div>
+
+      <div class="form-group">
+          <label for="comment">Pronunciation</label>
+          <textarea class="form-control" rows="5" id="comment"  th:text="${response.pronunciation}" disabled="disabled"
+          ></textarea>
+      </div>
+	<input type="submit" class="btn btn-success"  style="text-align: center;" value="Home"></input>
+  </form>
+</div>
+
+
+</body>
+<br />
+<p align="center">
+    Made with <span class="iconify" data-icon="ion-heart"> </span> by Bunty
+    Chakraborty
+</p>
+</html>
